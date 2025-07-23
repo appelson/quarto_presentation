@@ -1,0 +1,195 @@
+<!-- Adding YAML  -->
+---
+title: "R Markdown & Quarto Guide"
+format:
+  html:
+    toc: true
+    number-sections: true
+    code-tools: true
+  docx:
+    toc: true
+    number-sections: true
+  pdf:
+    toc: true
+    number-sections: true
+  latex:
+    toc: true
+    number-sections: true
+---
+
+<!-- Adding CSS  -->
+```{css, echo=FALSE}
+/* Load ACLU GT America fonts */
+@font-face {
+  font-family: 'gtam';
+  src: url('https://static.aclu.org/fonts/GT-America-Compressed-Regular.woff2') format('woff2');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'gtam2';
+  src: url('https://static.aclu.org/fonts/GT-America-Compressed-Bold.woff2') format('woff2');
+  font-weight: bold;
+  font-style: normal;
+}
+
+@font-face {
+      font-family: 'century';
+      src: url('https://static.aclu.org/fonts/CenturySchoolbook-Regular-webfont.woff') format('woff');
+  }
+
+p {
+  font-size: 20px;
+  line-height: 1.6;
+  color: #333333;
+  font-family: 'century';
+  margin-bottom: 1em;
+}
+
+/* Headings */
+h1, h2 {
+  color: #0055AA;
+  font-family: 'gtam2', Arial, sans-serif;
+  margin-top: 1.5em;
+  margin-bottom: 0.5em;
+  line-height: 1.2;
+  font-weight: 700;
+}
+
+h3 {
+  color: #0055AA;
+  font-family: 'gtam', Arial, sans-serif;
+  margin-top: 1.25em;
+  margin-bottom: 0.5em;
+  font-weight: 600;
+}
+
+/* Tables */
+table {
+  border-collapse: collapse;
+  width: 100%;
+  margin-bottom: 1.5em;
+  font-family: 'century';
+  font-size: 20px;
+}
+
+ul, ol {
+  margin-left: 1.5em;
+  margin-bottom: 1.25em;
+  color: #333;
+  font-family: 'century';
+}
+```
+
+<!-- Creating an introduction  -->
+## Introduction
+
+<!-- Creating a body paragraph to the introduction  -->
+<!-- We use **xxxxx** to make the text bold -->
+**R Markdown** and **Quarto** are extremely helpful for creating reproducible work, documentation, or for creating meaningful reports. R Markdown was released in 2014 as a cornerstone of R-based reporting. Quarto is its successor, developed in 2022 to "make the process of creating and collaborating on scientific and technical documents dramatically better".
+
+<!-- Creating a section break before the next piece  -->
+
+## What is R Markdown?
+
+**R Markdown** is a document format introduced by RStudio/Posit that allows users to combine:
+
+<!-- We use "-" to make a list -->
+- Narrative text written in **Markdown** (you will see these files on most GitHub pages),
+- **R code chunks** for analysis,
+- Embedded **outputs** (e.g., plots, tables, models)
+
+<!-- We use ### rather than ## to create a subset -->
+### File Structure
+
+An R Markdown document uses the `.Rmd` extension and typically consists of:
+
+<!-- We use [title](link) to link text -->
+- [A **YAML** header](https://monashdatafluency.github.io/r-rep-res/yaml-header.html)
+- Markdown-formatted narrative
+- Code chunks enclosed in triple backticks and labeled with `{r}`. Note that you can actually run different languages in R Markdown using triple backticks and the label `{python}` for example.
+
+### Output Formats
+
+With R Markdown, you can render documents to:
+
+- HTML (via `html_document`)
+- PDF (via LaTeX and `pdf_document`)
+- Word (`word_document`)
+- Presentations (`ioslides`, `slidy`, `xaringan`)
+- Dashboards (`flexdashboard`)
+- Shiny apps (`shiny`)
+
+## What is Quarto?
+
+**Quarto** is the new open-source scientific and technical publishing system designed as the successor to R Markdown. Quarto is designed to be **language-agnostic**, supporting  R, Python, Julia, and JavaScript and create more advanced projects like **books**, **websites**, and **Shiny apps**.
+
+### File and Project Structure
+
+Quarto files use the `.qmd` extension and have a structure similar to `.Rmd`, but with a bit different YAML.
+
+## Similarities
+
+<!-- Creating a table -->
+|Feature|RMarkdown|Quarto|
+|-------------------------|---------------|----------------------------------|
+|Code+TextIntegration|Yes|Yes|
+|Markdown-basedSyntax|Yes|Yes|
+|HTML/PDF/WordOutputs|Yes|Yes|
+|ShinySupport|Yes|Yes(betterinQuarto)|
+|Citations|Yes|Yes|
+|RStudio/VSCodeSupport|Yes(RStudio)|Yes(RStudio+VSCode+Jupytr)|
+|PlotOutput,Tables|Yes|Yes|
+
+------------------------------------------------------------------------
+
+## Differences
+
+### Language Support
+
+|Feature|RMarkdown|Quarto|
+|---------------|------------------------|--------------|
+|R|Yes|Yes|
+|Python|Yes(via`reticulate`)|Yes(native)|
+|Julia|No!|Yes|
+|ObservableJS|No!|Yes|
+
+R Markdown supports only R (or Python via `reticulate`, with limitations). *Note that you can also use SQL in R Markdown (I have used this for a project)*. Also **Quarto** supports native **websites**, **blogs**, and **books**, whereas R Markdown requires external packages.
+
+## Example
+
+In R Markdown and Quarto we use code chunks. These code chunks can have many options. Below are the common code chunks.
+
+|Option|What it does|
+|------------------------------------|------------------------------------|
+|`echo=FALSE`|Hides the code from output but still runs it. Useful for setup or styling.|
+|`eval=FALSE`|Shows the code, but doesn't run it. Use when you want to show an example.|
+|`include=FALSE`|Runs the code but shows neither the code nor the output.|
+|`message=FALSE`|Suppresses messages|
+|`warning=FALSE`|Hides warnings generated by the code.|
+|`fig.cap="..."`|Adds a caption to a plot or image.|
+
+### Different Languages
+
+Below we list the numbers from 1 to 10 using R
+
+<!-- Creating a code chunk -->
+```{r}
+for (i in 1:10){
+  print(i)
+}
+```
+
+Below we list the numbers from 1 to 10 using Python
+
+```{python}
+for i in range(1,11):
+  print(i)
+```
+
+Below we list the numbers from 1 to 10 using JavaScript
+
+```{ojs}
+Array.from({length: 10}, (_, i) => i + 1)
+```
